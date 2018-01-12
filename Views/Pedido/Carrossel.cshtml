@@ -5,50 +5,62 @@
 <h3>Catálogo</h3>
 
 <div id="items-carrossel" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#items-carrossel" data-slide-to="0" class="active"></li>
-        <li data-target="#items-carrossel" data-slide-to="1" class=""></li>
-        <li data-target="#items-carrossel" data-slide-to="2" class=""></li>
-    </ol>
+    @using(var produtos = Model)
+    {
     <div class="carousel-inner">
         <div class="item active row">
-            <div class="col-sm-4">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <img src="~/images/Produtos/large_1.jpg" />
-                    </div>
-                    <div class="panel-footer">
-                        <div>Camiseta Error 404</div>
-                        <div>R$ 59,90</div>
-                    </div>
-                </div>     
-            </div>
-            <div class="col-sm-4">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                       <img src="~/images/Produtos/large_2.jpg" />
-                    </div>
-                    <div class="panel-footer">
-                        <div>Camiseta Maybe the code be with you</div>
-                        <div>R$ 59,90</div>
-                    </div>
+            @for(int i=0; i < 4; i++)
+            {
+                <div class="col-xs-6 col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img class="img-responsive" src="~/images/Produtos/large_@(produtos[i].Id).jpg" />
+                        </div>
+                        <div class="panel-footer text-center">
+                            <div>@(produtos[i].Nome)</div>
+                            <div>@(produtos[i].Preco)</div>
+                            <a asp-controller="Pedido" asp-action="Carrinho" class="btn btn-default">Adicionar</a>
+                        </div>
+                    </div>     
                 </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <img src="~/images/Produtos/large_3.jpg" />
-                    </div>
-                    <div class="panel-footer">
-                        <div>Camiseta Coofee</div>
-                        <div>R$ 59,90</div>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
-        <div class="item"></div>
-        <div class="item"></div>
+        <div class="item">
+            @for(int i=4; i < 8; i++)
+            {
+                <div class="col-xs-6 col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img class="img-responsive" src="~/images/Produtos/large_@(produtos[i].Id).jpg" />
+                        </div>
+                        <div class="panel-footer text-center">
+                            <div>@(produtos[i].Nome)</div>
+                            <div>@(produtos[i].Preco)</div>
+                            <a asp-controller="Pedido" asp-action="Carrinho" class="btn btn-default">Adicionar</a>
+                        </div>
+                    </div>     
+                </div>
+            }
+        </div>
+        <div class="item">
+            @for(int i=8; i < 9; i++)
+            {
+                <div class="col-xs-6 col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img class="img-responsive" src="~/images/Produtos/large_@(produtos[i].Id).jpg" />
+                        </div>
+                        <div class="panel-footer text-center">
+                            <div>@(produtos[i].Nome)</div>
+                            <div>@(produtos[i].Preco)</div>
+                            <a asp-controller="Pedido" asp-action="Carrinho" class="btn btn-default">Adicionar</a>
+                        </div>
+                    </div>     
+                </div>
+            }
+        </div>
     </div>
+    }
     <a class="left carousel-control" href="#items-carrossel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
     <a class="right carousel-control" href="#items-carrossel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 </div>

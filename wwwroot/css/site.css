@@ -37,6 +37,7 @@
 .left.carousel-control,
 .right.carousel-control{
     background-image: none;
+    margin-bottom: 100px;
 }
 
 .navbar-brand{
