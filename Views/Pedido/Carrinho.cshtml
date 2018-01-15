@@ -37,14 +37,19 @@
             <div class="col-xs-2 col-md-2">R$ @item.PrecoUnitario</div>
             <div class="col-xs-3 col-md-2">@item.Quantidade</div>
             <div class="col-xs-3 col-md-2">
-                <span class="pull-right">R$ @item.Subtotal</span>
+                <span class="pull-right">R$ @item.SubTotal</span>
             </div>
         </div>
         }
     </div>
     <div class="panel-footer">
         <div class="row">
-            <div class="col-xs-8 col-md-10">Total: 4 Items</div>
+            <div class="col-xs-8 col-md-10">Total: @Model.Count() @{
+                if(Model.Count() > 1)
+                {
+                    
+                }
+            }</div>
             <div class="col-xs-4 col-md-2">
                 <span class="pull-right">R$ 200,00</span>
             </div>

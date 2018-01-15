@@ -36,7 +36,7 @@ namespace CasaDoCodigo.Controllers
                 new ItemPedido(3, produtos[2], 3)
             };
 
-            return View(itensCarrinho);
+            return View(ItensCarrinho);
         }
         public IActionResult Resumo()
         {
