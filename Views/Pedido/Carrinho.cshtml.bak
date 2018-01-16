@@ -1,16 +1,21 @@
 @{
     ViewData["Title"] = "Carrinho";
 }
+@using CasaDoCodigo;
+@using CasaDoCodigo.Models;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers;
+
 @model CasaDoCodigo.Models.ViewModels.CarrinhoViewModel
 
 <h3>Meu Carrinho</h3>
+
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="row">
             <div class="col-xs-4 col-md-6">Item</div>
-            <div class="col-xs-2 col-md-2 text-center">Preco Unitário</div>
-            <div class="col-xs-3 col-md-2 text-center">Quantidade</div>
+            <div class="col-xs-2 col-md-2">Preco Unitário</div>
+            <div class="col-xs-3 col-md-2">Quantidade</div>
             <div class="col-xs-3 col-md-2">
                 <span class="pull-right">Subtotal</span>
             </div>
@@ -19,8 +24,8 @@
     <div class="panel-body">
         @foreach(var item in Model.Itens)
         {
-        <div class="row row-center">
-            <div class="col-xs-4 col-md-6 row-center">
+        <div class="row flex-center">
+            <div class="col-xs-4 col-md-6 flex-center">
                 
                 <div class="col-xs-12 col-sm-6">
                     <img class="img-responsive" src="~/images/Produtos/small_@(item.Id).jpg" />

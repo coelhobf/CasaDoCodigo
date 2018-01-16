@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using CasaDoCodigo.Models.ViewModels;
 
 namespace CasaDoCodigo.Controllers
 {
@@ -23,11 +24,7 @@ namespace CasaDoCodigo.Controllers
             new Produto(9, "Desenvolvimento de Jogos para Android", 69.90m)
         };
 
-        public IActionResult Carrossel()
-        {
-            return View(produtos);
-        }
-        public IActionResult Carrinho()
+        private CarrinhoViewModel GetCarrinhoViewModel()
         {
             var itensCarrinho = new List<ItemPedido>
             {
@@ -35,12 +32,23 @@ namespace CasaDoCodigo.Controllers
                 new ItemPedido(2, produtos[1], 2),
                 new ItemPedido(3, produtos[2], 3)
             };
+            
+            var viewModel = new CarrinhoViewModel(itensCarrinho);
 
-            return View(itensCarrinho);
+            return viewModel;
+        }
+
+        public IActionResult Carrossel()
+        {
+            return View(produtos);
+        }
+        public IActionResult Carrinho()
+        {
+            return View(GetCarrinhoViewModel());
         }
         public IActionResult Resumo()
         {
-            return View();
+            return View(GetCarrinhoViewModel());
         }
     }
 }
