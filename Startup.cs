@@ -24,6 +24,10 @@ namespace CasaDoCodigo
             services.AddMvc();
 
             string connectionString = Configuration.GetSection("ConnectionString").GetValue<string>("Default");
+
+            //services.AddDbContext<Contexto>(options => options.UseMySql(connectionString));
+            services.AddDbContext<Contexto>();
+            services.AddTransient<IDataService, DataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +50,10 @@ namespace CasaDoCodigo
                     name: "default",
                     template: "{controller=Pedido}/{action=Carrossel}/{id?}");
             });
+
+            IDataService dataService = serviceProvider.GetService<IDataService>();
+
+            dataService.InicializaDB();
         }
     }
 }
