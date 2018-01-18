@@ -1,63 +1,46 @@
 @{
     ViewData["Title"] = "Carrossel";
 }
+@model List<Produto>
 
 <h3>Catálogo</h3>
 
 <div id="items-carrossel" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-        <div class="item active row">
-            @for(int i=0; i < 4; i++)
-            {
-                <div class="col-xs-6 col-md-3">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <img class="img-responsive" src="~/images/Produtos/large_@(Model[i].Id).jpg" />
+    <div class="carousel-inner" role="listbox">
+        @{
+            const int tamanhoPagina = 4;
+            int numPaginas = (int)Math.Ceiling((double)Model.Count() / tamanhoPagina);
+        }
+        @for(int pagina = 0; pagina < numPaginas; pagina++)
+        {
+            <div class="item @(pagina == 0 ? 'active' : '') row">
+                @{
+                    var produtosPagina =
+                        Model
+                        .Skip(tamanhoPagina * pagina)
+                        .Take(tamanhoPagina);
+                }
+                @foreach(var produto in produtosPagina)
+                {
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <img src="~/images/produtos/large_@(produto.Id).jpg" />
+                            </div>
+                            <div class="panel-footer">
+                                <div>@(produto.Nome)</div>
+                                <div>R$ @(produto.Preco)</div>
+                                <div class="text-center">
+                                    <a asp-action="carrinho">Adicionar</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="panel-footer text-center">
-                            <div>@(Model[i].Nome)</div>
-                            <div>@(Model[i].Preco)</div>
-                            <a asp-controller="Pedido" asp-action="Carrinho" class="btn btn-default">Adicionar</a>
-                        </div>
-                    </div>     
-                </div>
-            }
-        </div>
-        <div class="item">
-            @for(int i=4; i < 8; i++)
-            {
-                <div class="col-xs-6 col-md-3">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <img class="img-responsive" src="~/images/Produtos/large_@(Model[i].Id).jpg" />
-                        </div>
-                        <div class="panel-footer text-center">
-                            <div>@(Model[i].Nome)</div>
-                            <div>@(Model[i].Preco)</div>
-                            <a asp-controller="Pedido" asp-action="Carrinho" class="btn btn-default">Adicionar</a>
-                        </div>
-                    </div>     
-                </div>
-            }
-        </div>
-        <div class="item">
-            @for(int i=8; i < 9; i++)
-            {
-                <div class="col-xs-6 col-md-3">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <img class="img-responsive" src="~/images/Produtos/large_@(Model[i].Id).jpg" />
-                        </div>
-                        <div class="panel-footer text-center">
-                            <div>@(Model[i].Nome)</div>
-                            <div>@(Model[i].Preco)</div>
-                            <a asp-controller="Pedido" asp-action="Carrinho" class="btn btn-default">Adicionar</a>
-                        </div>
-                    </div>     
-                </div>
-            }
-        </div>
+                    </div>
+                }
+            </div>
+        }
     </div>
+
     <a class="left carousel-control" href="#items-carrossel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
     <a class="right carousel-control" href="#items-carrossel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 </div>
